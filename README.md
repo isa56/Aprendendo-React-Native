@@ -1,6 +1,6 @@
 # Aprendendo React-Native
 
-\* Parei na aula 65
+\* Parei na aula 6582
 <br>
 
 [Repositório do curso](https://github.com/cod3rcursos/curso-react-native);
@@ -36,9 +36,9 @@ Dar o commit normalmente
 ## Código:
 
 ### Curso Cod3r
-[X] [Seção 3 - Fundamentos React-Native](https://github.com/isa56/Aprendendo-React-Native/tree/curso-cod3r-modulo-basico); <br/> 
-[X] [Seção 4 - Projeto Calculadora](https://github.com/isa56/Aprendendo-React-Native/tree/curso-cod3r-4calculadora); <br/>
-[ ] Seção 5 - Projeto Campo Minado; <br/>
+[X] [Seção 3 - Fundamentos React-Native](sec3_fundamentos/); <br/> 
+[X] [Seção 4 - Projeto Calculadora](sec4_calculator/); <br/>
+[X] [Seção 5 - Projeto Campo Minado](sec6_campo/); <br/>
 [ ] Seção 6 - React Navigation; <br/>
 [ ] Seção 7 - Cadastro Completo com Hooks e API; <br/>
 [ ] Seção 8 - Projeto Tasks (Offline); <br/>
