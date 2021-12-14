@@ -1,6 +1,6 @@
 # Aprendendo React-Native
 
-\* Parei na aula 6582
+\* Parei na aula 109
 <br>
 
 [Repositório do curso](https://github.com/cod3rcursos/curso-react-native);
@@ -38,9 +38,9 @@ Dar o commit normalmente
 ### Curso Cod3r
 [X] [Seção 3 - Fundamentos React-Native](sec3_fundamentos/); <br/> 
 [X] [Seção 4 - Projeto Calculadora](sec4_calculator/); <br/>
-[X] [Seção 5 - Projeto Campo Minado](sec6_campo/); <br/>
-[ ] Seção 6 - React Navigation; <br/>
-[ ] Seção 7 - Cadastro Completo com Hooks e API; <br/>
+[X] [Seção 5 - Projeto Campo Minado](sec5_campo/); <br/>
+[X] [Seção 6 - React Navigation](sec6_navigation); <br/>
+[ ] [Seção 7 - Cadastro Completo com Hooks e API](sec7_cadastro); <br/>
 [ ] Seção 8 - Projeto Tasks (Offline); <br/>
 [ ] Seção 9 - Projeto Tasks (Backend); <br/>
 [ ] Seção 10 - Projeto Tasks (Online); <br/>
@@ -76,3 +76,7 @@ Dar o commit normalmente
 [ ] Seção 18 - Bonus: JavaScript Refresher; <br/>
 [ ] Seção 19 - Bonus: React.js Refresher; <br/>
 [ ] Seção 20 - Bonus; <br/>
+
+### Materiais Extras:
+
+- Aula sobre [Redux](https://www.youtube.com/watch?v=J0g1cv_03XQ);
