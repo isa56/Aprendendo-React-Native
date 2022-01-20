@@ -20,9 +20,9 @@
     `yarn / expo start`
 
 * Usando react-native: <br/>
-    `react-native init <nomeDoProjeto>` 
-
-
+    `react-native init <nomeDoProjeto>` <br/>
+ou
+    `npx react-native init <nomeDoProjeto>`
 ## Para dar push em cada módulo:
 
 `git init -b nome-da-branch`
@@ -40,20 +40,13 @@ Dar o commit normalmente
 [X] [Seção 4 - Projeto Calculadora](sec4_calculator/); <br/>
 [X] [Seção 5 - Projeto Campo Minado](sec5_campo/); <br/>
 [X] [Seção 6 - React Navigation](sec6_navigation); <br/>
-[ ] [Seção 7 - Cadastro Completo com Hooks e API](sec7_cadastro); <br/>
-[ ] Seção 8 - Projeto Tasks (Offline); <br/>
+[X] [Seção 7 - Cadastro Completo com Hooks e API](sec7_cadastro); <br/>
+[ ] [Seção 8 - Projeto Tasks (Offline)](sec8_tasksoffline); <br/>
 [ ] Seção 9 - Projeto Tasks (Backend); <br/>
 [ ] Seção 10 - Projeto Tasks (Online); <br/>
 [ ] Seção 11 - Projeto Clone do Instagram; <br/>
 [ ] Seção 12 - Conclusão; <br/>
-[ ] Seção 13 - Revisão de JavaScript - Configuração do Ambiente; <br/>
-[ ] Seção 14 - Revisão de JavaScript - Fundamentos; <br/>
-[ ] Seção 15 - Revisão de JavaScript - Funções; <br/>
-[ ] Seção 16 - Revisão de JavaScript - Classes; <br/>
-[ ] Seção 17 - Revisão de JavaScript - Arrays; <br/>
 [ ] Seção 18 - Express; <br/>
-[ ] Seção 19 - Projeto Tasks (Offline) - Versão Original; <br/>
-[ ] Seção 20 - Projeto Tasks (Online) - Versão Original; <br/>
 
 ### Curso Practical Guide:
 [ ] Seção 1 - Getting Started; <br/>
