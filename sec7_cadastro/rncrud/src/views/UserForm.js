@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
+import UsersContext from '../context/UsersContext';
 
 export default ({ route, navigation }) => {
 
     const [user, setUser] = useState(route.params ? route.params : {});
+    const { dispatch } = useContext(UsersContext);
+
 
     return (
 
         <View style={style.form} >
             <Text>Name</Text>
             <TextInput
-                onChangeText={name => setUser({...user, name})}
+                onChangeText={name => setUser({ ...user, name })}
                 style={style.input}
                 placeholder='Informe o Nome'
                 value={user.name}
@@ -19,7 +22,7 @@ export default ({ route, navigation }) => {
 
             <Text>E-Mail</Text>
             <TextInput
-                onChangeText={email => setUser({...user, email})}
+                onChangeText={email => setUser({ ...user, email })}
                 style={style.input}
                 placeholder='Informe o Nome'
                 value={user.email}
@@ -27,7 +30,7 @@ export default ({ route, navigation }) => {
 
             <Text>URL do Avatar</Text>
             <TextInput
-                onChangeText={avatarUrl => setUser({...user, avatarUrl})}
+                onChangeText={avatarUrl => setUser({ ...user, avatarUrl })}
                 style={style.input}
                 placeholder='Informe a URL do Avatar'
                 value={user.avatarUrl}
@@ -36,7 +39,11 @@ export default ({ route, navigation }) => {
             <Button
                 icon={<Icon name="save" size={25} color="white" />}
                 onPress={() => {
-                    navigation.goBack();
+                    dispatch({
+                        type: user.id ? 'updateUser' : 'createUser',
+                        payload: user,
+                    })
+                    navigation.goBack()
                 }}
                 title="Salvar"
             />
@@ -49,7 +56,7 @@ export default ({ route, navigation }) => {
 const style = StyleSheet.create({
     form: {
         padding: 12,
-    }, 
+    },
     input: {
         borderColor: 'gray',
         borderRadius: 5,
