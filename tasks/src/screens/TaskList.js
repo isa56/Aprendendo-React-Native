@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { ImageBackground, FlatList, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ImageBackground, FlatList, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -16,28 +16,22 @@ export default class TaskList extends Component {
     state = {
         showDoneTasks: true,
         visibleTasks: [],
+        showAddTaskModal: false,
         tasks: [
             {
                 id: Math.random(),
-                desc: 'Comprar Livro de React Native',
+                description: 'Comprar Livro de React Native',
                 estimeAt: new Date(),
                 doneAt: new Date(),
             },
 
             {
                 id: Math.random(),
-                desc: 'Ler Livro de React Native',
-                estimeAt: new Date(),
-                doneAt: new Date(),
-            },
-            {
-                id: Math.random(),
-                desc: 'Estudar Livro de React Native',
+                description: 'Ler Livro de React Native',
                 estimeAt: new Date(),
                 doneAt: new Date(),
             },
         ],
-        showAddTaskModal: false,
     };
 
     toggleTask = (taskId) => {
@@ -59,7 +53,6 @@ export default class TaskList extends Component {
         this.setState({ showDoneTasks: !this.state.showDoneTasks }, this.filterTasks);
     };
 
-    isPending = (task) => task.doneAt === null;
 
     filterTasks = () => {
 
@@ -75,6 +68,28 @@ export default class TaskList extends Component {
         this.setState({ visibleTasks });
     };
 
+    addTask = (newTask) => {
+        if (!newTask.desc || !newTask.desc.trim()) {
+            Alert.alert("Dados Inválidos", "Descrição não informada!");
+            return;
+        };
+
+        if (!newTask.date) {
+            newTask.date = new Date();
+        };
+
+        const tasks = [...this.state.tasks];
+
+        tasks.push({
+            id: Math.random(),
+            description: newTask.description,
+            estimeAt: newTask.date
+        });
+
+        this.setState({ tasks, showAddTaskModal: false}, this.filterTasks);
+
+    };
+
     render() {
 
         const today = moment().locale('pt-br').format('ddd, D [de] MMMM [/] Y');
@@ -82,7 +97,7 @@ export default class TaskList extends Component {
         return (
 
             <SafeAreaView style={styles.container}>
-                <AddTask isVisible={this.state.showAddTaskModal} onCancel={() => this.setState({ showAddTaskModal: false })} />
+                <AddTask isVisible={this.state.showAddTaskModal} onCancel={() => this.setState({ showAddTaskModal: false })} onSave={this.addTask} />
 
                 <ImageBackground source={todayImage} style={styles.background}>
 
@@ -108,8 +123,15 @@ export default class TaskList extends Component {
 
                 </View>
 
-                <TouchableOpacity activeOpacity={0.7} onPress={this.setState({showAddTaskModal:true})} >
+                <TouchableOpacity
+                    style={[styles.addButton,
+                    { backgroundColor: commonStyles.colors.today }]}
+                    activeOpacity={0.7}
+                    onPress={() => this.setState({ showAddTaskModal: true })}
+                >
+
                     <Icon name="plus" size={20} color={commonStyles.colors.secondary} />
+
                 </TouchableOpacity>
 
             </SafeAreaView>
