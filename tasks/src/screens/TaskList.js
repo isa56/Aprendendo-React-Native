@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import { ImageBackground, Flatlist, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -12,13 +12,41 @@ import Task from '../components/Task';
 export default class TaskList extends Component {
 
     state = {
-        tasks: [{
-            id: Math.random(),
-            desc: 'Comprar Livro de React Native',
-            estimeAt: new Date(),
-            doneAt: new Date(),
-        }],
+        tasks: [
+            {
+                id: Math.random(),
+                desc: 'Comprar Livro de React Native',
+                estimeAt: new Date(),
+                doneAt: new Date(),
+            },
+
+            {
+                id: Math.random(),
+                desc: 'Ler Livro de React Native',
+                estimeAt: new Date(),
+                doneAt: new Date(),
+            },
+            {
+                id: Math.random(),
+                desc: 'Estudar Livro de React Native',
+                estimeAt: new Date(),
+                doneAt: new Date(),
+            },
+
+        ],
     };
+
+    toggleTask = (taskId) => {
+        const tasks = [...this.state.tasks];
+        tasks.forEach(task => {
+            if (task.id === taskId) {
+                task.doneAt = task.doneAt ? null : new Date();
+            };
+        });
+
+        this.setState({ tasks });
+
+    }
 
     render() {
 
@@ -38,14 +66,13 @@ export default class TaskList extends Component {
                 </ImageBackground>
 
                 <View style={styles.taskList}>
-{/* AQUI
-                    <Flatlist data={this.state.tasks}
+
+                    <FlatList data={this.state.tasks}
                         keyExtractor={item => `${item.id}`}
-                        renderItem={({item}) =><Task }
+                        renderItem={({ item }) => <Task {...item} toggleTask={this.toggleTask} />}
                     />
-*/}
-                    <Task description="Tarefa #1" estimateAt={new Date()} doneAt={new Date()} />
-                    <Task description="Tarefa #2" estimateAt={new Date()} doneAt={null} />
+
+
 
                 </View>
 

@@ -1,7 +1,7 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -10,7 +10,7 @@ import commonStyles from '../commonStyles';
 
 export default (props) => {
 
-    const doneOrNotStyle = props.doneAt != null ? { color: '#888', textDecorationLine: 'line-through'} : {};
+    const doneOrNotStyle = props.doneAt != null ? { color: '#888', textDecorationLine: 'line-through' } : {};
 
     const date = props.doneAt ? props.doneAt : props.estimateAt;
     const formatedDate = moment(date).locale('pt-br').format('ddd, D [de] MMMM');
@@ -18,14 +18,20 @@ export default (props) => {
     return (
         <View style={styles.container}>
 
-            <View style={styles.checkContainer}>
-                {getCheckView(props.doneAt)}
-            </View>
+            <TouchableWithoutFeedback
+                onPress={() => props.toggleTask(props.id)} >
+
+                <View style={styles.checkContainer}>
+                    {getCheckView(props.doneAt)}
+                </View>
+
+            </TouchableWithoutFeedback>
 
             <View>
                 <Text style={[styles.description, doneOrNotStyle]}>{props.description}</Text>
                 <Text style={[styles.date, doneOrNotStyle]}>{formatedDate}</Text>
             </View>
+
 
         </View>
     );
@@ -35,7 +41,7 @@ function getCheckView(doneAt) {
     if (doneAt != null) {
         return (
             <View style={styles.done}>
-                <Ionicons name="ios-checkmark" size={20} color='#FFF'></Ionicons>
+                <Icon name="check" size={20} color="#FFF" />
             </View>
         )
     } else {
