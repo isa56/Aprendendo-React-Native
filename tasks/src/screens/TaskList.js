@@ -6,32 +6,23 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import AsyncStorage from "@react-native-community/async-storage";
 import todayImage from '../../assets/imgs/today.jpg';
 import commonStyles from '../commonStyles';
 import Task from '../components/Task';
 import AddTask from './AddTask';
 
+const initialState = {
+    showDoneTasks: true,
+    visibleTasks: [],
+    showAddTaskModal: false,
+    tasks: [],
+}
+
 export default class TaskList extends Component {
 
     state = {
-        showDoneTasks: true,
-        visibleTasks: [],
-        showAddTaskModal: false,
-        tasks: [
-            {
-                id: Math.random(),
-                description: 'Comprar Livro de React Native',
-                estimeAt: new Date(),
-                doneAt: new Date(),
-            },
-
-            {
-                id: Math.random(),
-                description: 'Ler Livro de React Native',
-                estimeAt: new Date(),
-                doneAt: new Date(),
-            },
-        ],
+        ...initialState,
     };
 
     toggleTask = (taskId) => {
@@ -45,14 +36,17 @@ export default class TaskList extends Component {
         this.setState({ tasks }, this.filterTasks);
     };
 
-    componentDidMount = () => {
-        this.filterTasks();
-    }
-
+    
     toggleFilter = () => {
         this.setState({ showDoneTasks: !this.state.showDoneTasks }, this.filterTasks);
     };
 
+
+    componentDidMount = async () => {
+        const stateString = await AsyncStorage.getItem('tasksState');
+        const state = JSON.parse(stateString) || initialState;
+        this.setState(state);
+    }
 
     filterTasks = () => {
 
@@ -62,14 +56,22 @@ export default class TaskList extends Component {
             visibleTasks = [...this.state.tasks];
         } else {
             const pending = (task) => task.doneAt === null;
-            visibleTasks = this.state.tasks.filter(this.isPending);
+            visibleTasks = this.state.tasks.filter(pending);
         }
 
         this.setState({ visibleTasks });
+
+        AsyncStorage.setItem('tasksState', JSON.stringify(this.state));
     };
 
+    deleteTask = (id) => {
+        const tasks = this.state.tasks.filter(task => task.id !== id);
+        this.setState({ tasks }, this.filterTasks);
+    }
+
     addTask = (newTask) => {
-        if (!newTask.desc || !newTask.desc.trim()) {
+
+        if (!newTask.description || !newTask.description.trim()) {
             Alert.alert("Dados Inválidos", "Descrição não informada!");
             return;
         };
@@ -86,7 +88,7 @@ export default class TaskList extends Component {
             estimeAt: newTask.date
         });
 
-        this.setState({ tasks, showAddTaskModal: false}, this.filterTasks);
+        this.setState({ tasks, showAddTaskModal: false }, this.filterTasks);
 
     };
 
@@ -118,7 +120,7 @@ export default class TaskList extends Component {
 
                     <FlatList data={this.state.visibleTasks}
                         keyExtractor={item => `${item.id}`}
-                        renderItem={({ item }) => <Task {...item} toggleTask={this.toggleTask} />}
+                        renderItem={({ item }) => <Task {...item} onToggleTask={this.toggleTask} onDelete={this.deleteTask} />}
                     />
 
                 </View>

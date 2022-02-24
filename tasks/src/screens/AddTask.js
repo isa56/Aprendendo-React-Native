@@ -20,9 +20,7 @@ export default class AddTask extends Component {
             date: this.state.date,
         }
 
-        if (this.props.onSave) {
-            this.props.onSave(newTask);
-        }
+        this.props.onSave && this.props.onSave(newTask);
 
         this.setState({ ...initialState });
 
@@ -52,10 +50,6 @@ export default class AddTask extends Component {
 
     }
 
-    saveTask = () => {
-
-    };
-
     render() {
         return (
             <Modal transparent={true} visible={this.props.isVisible} onRequestClose={this.props.onCancel} animationType='slide'>
@@ -67,7 +61,7 @@ export default class AddTask extends Component {
 
                     <Text style={styles.header}>Nova Tarefa</Text>
 
-                    <TextInput style={styles.input} placeholder="Informe a Descrição" onChangeText={desc => this.setState({ desc })} value={this.state.desc} />
+                    <TextInput style={styles.input} placeholder="Informe a Descrição" onChangeText={(description) => this.setState({ description })} value={this.state.description} />
 
                     {this.getDatePicker()}
 
