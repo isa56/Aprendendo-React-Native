@@ -16,7 +16,7 @@ module.exports = (app) => {
 
             bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
                 if (err || !isMatch) {
-                    return res.status(401).send();
+                    return res.status(401).send("Usuário e senha não conferem!");
                 }
 
                 const payload = { id: user.id };

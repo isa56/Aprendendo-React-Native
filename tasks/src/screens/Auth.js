@@ -5,8 +5,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import { CommonActions } from '@react-navigation/native';
 
-
-
 import AuthInput from '../components/AuthInput';
 
 import commonStyles from '../commonStyles';
@@ -61,11 +59,9 @@ export default class Auth extends Component {
                 password: this.state.password,
             });
 
-            //AsyncStorage.setItem('userData', JSON.stringify(res.data));
+            AsyncStorage.setItem('userData', JSON.stringify(res.data));
 
             axios.defaults.headers.common['Authorization'] = `bearer ${res.data.token}`;
-
-            Alert.alert("Sucesso!", "Sucesso!");
 
             this.props.navigation.dispatch(
                 CommonActions.reset({
