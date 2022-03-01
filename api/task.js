@@ -22,9 +22,11 @@ module.exports = app => {
         req.body.userId = req.user.id;
 
         app.db('tasks')
-            .insert(req.body)
-            .then(_ => res.status(204).json.send())
-            .catch((err) => res.status(400).json(err));
+        .insert(req.body)
+        .then(_ => res.status(204).send())
+        .catch(err => res.status(400).json(err))
+
+        console.log("Salvando task: " + req.body.description);
     };
 
     const remove = (req, res) => {
